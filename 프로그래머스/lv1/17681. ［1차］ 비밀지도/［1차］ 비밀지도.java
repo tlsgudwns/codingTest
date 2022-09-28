@@ -5,6 +5,7 @@ class Solution {
         String[] answer = new String[n];
         char[] str = new char[n];
         boolean[][] map = new boolean[n][n];
+        
         int row = 0;
         int col = n-1;
         for (int item : arr1) {
@@ -33,6 +34,7 @@ class Solution {
             col = n-1;
             row++;
         }
+        
         int idx = 0;
         int idx2 = 0;
         for (boolean[] a : map) {
