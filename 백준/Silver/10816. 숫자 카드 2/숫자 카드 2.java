@@ -1,85 +1,66 @@
+import java.io.*;
 import java.util.Arrays;
 import java.util.StringTokenizer;
-import java.util.Scanner;
 
 public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        // BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        String s = br.readLine();
+        int n = Integer.parseInt(s);
+        int[] nums = new int[n];
 
-	public static void main(String[] args) {
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-		Scanner in = new Scanner(System.in);
-		
-		int N = in.nextInt();
-		int[] arr = new int[N];
-		
-		for(int i = 0; i < N; i++) {
-			arr[i] = in.nextInt();
-		}
-		
-		Arrays.sort(arr);	// 이분 탐색을 하기 위해서는 반드시 정렬되어있어야 한다.
-		
-		int M = in.nextInt();
-		
-		StringBuilder sb = new StringBuilder();
-		
-		for(int i = 0; i < M; i++) {
-			int key = in.nextInt();
+        for (int i = 0; i < n; i++) {
+            nums[i] = Integer.parseInt(st.nextToken());
+        }
 
-			// upperBound와 lowerBound의 차이 값을 구한다.
-			sb.append(upperBound(arr, key) - lowerBound(arr, key)).append(' ');
-		}
-		System.out.println(sb);
-	}
+        int m = Integer.parseInt(br.readLine());
+        StringTokenizer st2 = new StringTokenizer(br.readLine());
+        int[] targets = new int[m];
+        for (int i = 0; i < m; i++) {
+            targets[i] = Integer.parseInt(st2.nextToken());
+        }
+
+        StringBuilder sb = new StringBuilder();
 
 
-	private static int lowerBound(int[] arr, int key) {
-		int lo = 0; 
-		int hi = arr.length; 
 
-		// lo가 hi랑 같아질 때 까지 반복
-		while (lo < hi) {
+        Arrays.sort(nums);
 
-			int mid = (lo + hi) / 2; // 중간위치를 구한다.
+        for (int i = 0; i < targets.length; i++) { //upperbound와 lowerbound 둘다 구하고 빼면 그 카드의 개수일것
+            int lo = 0;
+            int hi = nums.length;
 
-			/*
-			 *  key 값이 중간 위치의 값보다 작거나 같을 경우
-			 *  
-			 *  (중복 원소에 대해 왼쪽으로 탐색하도록 상계를 내린다.)
-			 */
-			if (key <= arr[mid]) {
-				hi = mid;
-			}
+            while (lo < hi) { //upper
+                int mid = (lo + hi) / 2;
+                if (targets[i] >= nums[mid]) {
+                    lo = mid + 1;
+                } else {
+                    hi = mid;
+                }
+            }
+            int upperbound = lo;
 
-			else {
-				lo = mid + 1;
-			}
+            lo = 0;
+            hi = nums.length;
 
-		}
+            while (lo < hi) {
+                int mid = (lo + hi) / 2;
+                if (targets[i] > nums[mid]) {
+                    lo = mid + 1;
+                } else {
+                    hi = mid;
+                }
+            }
+            int lowerbound = lo;
 
-		return lo;
-	}
 
-	private static int upperBound(int[] arr, int key) {
-		int lo = 0; 
-		int hi = arr.length; 
+            sb.append(upperbound - lowerbound).append(' ');
+        }
 
-		// lo가 hi랑 같아질 때 까지 반복
-		while (lo < hi) {
-
-			int mid = (lo + hi) / 2; // 중간위치를 구한다.
-
-			// key값이 중간 위치의 값보다 작을 경우
-			if (key < arr[mid]) {
-				hi = mid;
-			}
-		
-			else {
-				lo = mid + 1;
-                
-			}
-
-		}
-
-		return lo;
-	}
-	
+        System.out.println(sb);
+        
+    }
 }
