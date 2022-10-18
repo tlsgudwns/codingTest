@@ -3,18 +3,21 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
+    public static void main(String[] args)  throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        String s = br.readLine();
+        int n = Integer.parseInt(s);
+        StringTokenizer st = new StringTokenizer(br.readLine());
         int[] requireList = new int[n];
-        int a = 0;
         for (int i = 0; i < n; i++) {
-            requireList[i] = sc.nextInt();
+            requireList[i] = Integer.parseInt(st.nextToken());
         }
-        int totalBudget = sc.nextInt();
 
-
-
+        s = br.readLine();
+        int totalBudget = Integer.parseInt(s);
+        int a = 0;
         int left = 0;
         int max = -1;
         for (int i = 0; i < n; i++) {
@@ -54,4 +57,5 @@ public class Main {
 
     }
 }
+
 
