@@ -18,33 +18,34 @@ public class Main {
         Arrays.sort(cards);
 
         int m = Integer.parseInt(br.readLine());
-
-        //int[] targets = new int[m]; //찾으려는 카드배열
         StringTokenizer st2 = new StringTokenizer(br.readLine());
-
-//        for (int i = 0; i < n; i++) {
-//            targets[i] = Integer.parseInt(st2.nextToken());
-//        }
-
         StringBuilder sb = new StringBuilder();
+        int[] targets = new int[m]; //찾으려는 카드배열
 
 
-//        for (int i = 0; i < targets.length; i++) {
-//            if (binarySearch(cards, targets[i])) {
-//                sb.append(1).append(" ");
-//            } else {
-//                sb.append(0).append(" ");
-//            }
-//        }
         for (int i = 0; i < m; i++) {
-            int num = Integer.parseInt(st2.nextToken());
-            if (binarySearch(cards, num)) {
+            targets[i] = Integer.parseInt(st2.nextToken());
+        }
+
+
+
+
+        for (int i = 0; i < targets.length; i++) {
+            if (binarySearch(cards, targets[i])) {
                 sb.append(1).append(" ");
             } else {
                 sb.append(0).append(" ");
             }
         }
-                
+//        for (int i = 0; i < m; i++) {
+//            int num = Integer.parseInt(st2.nextToken());
+//            if (binarySearch(cards, num)) {
+//                sb.append(1).append(" ");
+//            } else {
+//                sb.append(0).append(" ");
+//            }
+//        }
+
 
         System.out.println(sb);
 
