@@ -8,38 +8,41 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int n = Integer.parseInt(st.nextToken());
-        //int target = Integer.parseInt(st.nextToken()); //만드려고하는 래넛ㄴ개수
-        int target = Integer.parseInt(st.nextToken());
-        long[] prev = new long[n]; //기존의 랜선 배열
+        int num = Integer.parseInt(st.nextToken());
+        int require = Integer.parseInt(st.nextToken());
 
+        long[] lan = new long[num];
+
+        for (int i = 0; i < num; i++) {
+            lan[i] = Long.parseLong(br.readLine());
+        }
+
+        long min = Long.MAX_VALUE;
         long max = -1;
-        for (int i = 0; i < n; i++) {
-            prev[i] = Integer.parseInt(br.readLine());
-            max = prev[i] > max ? prev[i] : max;
+        for (int i = 0; i < num; i++) {
+            max = lan[i] > max ? lan[i] : max;
+            min = lan[i] < min ? lan[i] : min;
         }
         
+        long left = 1;
+        long right = max + 1;
+        long mid = 0;
+        long cnt = 0;
         
+        while (left < right) {
+            mid = (left + right) / 2;
+            cnt = 0;
 
-        long lo = 0;
-        long hi = max + 1;
-
-        while (lo < hi) {
-            long mid = (lo + hi) / 2;
-            long total = 0;
-            for (int i = 0; i < prev.length; i++) {
-                total += prev[i] / mid;
+            for (int i = 0; i < lan.length; i++) {
+                cnt += lan[i] / mid;
             }
 
-            if (total < target) {
-                hi = mid;
+            if (cnt < require) {
+                right = mid;
             } else {
-                lo = mid + 1;
+                left = mid + 1;
             }
         }
-
-
-        System.out.println(lo - 1);
-
+        System.out.println(left - 1);
     }
 }
