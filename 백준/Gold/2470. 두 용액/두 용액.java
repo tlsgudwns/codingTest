@@ -40,7 +40,6 @@ class Main {
         }
 
         System.out.print(arr[p1Answer] + " " + arr[p2Answer]);
-//        System.out.print(" ");
-//        System.out.print(p2Answer);
+
     }
 }
