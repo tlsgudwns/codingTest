@@ -38,11 +38,11 @@ public class Main {
         }
 
         for (int i = idx; i < N; i++) {
-            if (!visit[i]) { //이거 없어도 되나 실험하기
+            //if (!visit[i]) { //이거 없어도 되나 실험하기
                 visit[i] = true;
                 combi(i + 1, count + 1);
                 visit[i] = false;
-            }
+            //}
         }
     }
     
